@@ -13,12 +13,21 @@ app.listen(3000, async () => {
   console.log("Mongo db connected");
 
   const tweetRepo = new TweetRepository();
-  const tweet = await tweetRepo.getWithComments('66a03cfd485459d4ec2e48b5')
-  console.log(tweet);
- 
- 
-
+  const tweet = await tweetRepo.getAll(0 ,4)
+  console.log(tweet[0].contentWithEmail);
 });
+
+//************************************************
+//  PAGINATION
+// const tweetRepo = new TweetRepository();
+//   const tweet = await tweetRepo.getAll(2,4)
+//   console.log(tweet);
+//************************************************
+
+// const tweetRepo = new TweetRepository();
+//   const tweet = await tweetRepo.getWithComments('66a03cfd485459d4ec2e48b5')
+//   console.log(tweet);
+
 //************************************************
 
 // const tweetRepo = new TweetRepository();
