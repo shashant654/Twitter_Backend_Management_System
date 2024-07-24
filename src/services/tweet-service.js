@@ -24,9 +24,12 @@ class TweetService {
     newTags = newTags.map(tag => {
           return {title: tag, tweets: [tweet.id]}
     });
-    const response = await this.hashtagRepository.bulkCreate(newTags)
-    console.log(response);
-    
+    await this.hashtagRepository.bulkCreate(newTags)
+    alreadyPresentTags.forEach((tag) => {
+          tag.tweets.push(tweet.id);
+          tag.save()
+    })
+      
     return tweet;
     // todo create hashtags and add here
 
