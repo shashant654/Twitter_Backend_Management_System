@@ -19,6 +19,15 @@ class TweetRepository {
     }
   }
 
+  async getWithComments(id) {
+    try {
+      const tweet = await Tweet.findById(id).populate({path: 'comments'});
+      return tweet;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async update(tweetId, data) {
     try {
       // here {new:true} if write then mongodb return v latest data ko hi krega otherwise return by default previous wala krega and update only latest wala krega
