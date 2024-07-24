@@ -1,22 +1,73 @@
 const express = require("express");
 const connect = require("./config/database");
+const app = express();
 
 const Tweet = require("./models/tweet");
 const Comment = require('./models/comment')
-const app = express();
 
-const TweetRepository = require("./repository/tweet-repository");
+// const TweetRepository = require("./repository/tweet-repository");
+
+const TweetService = require('./services/tweet-service')
+const { TweetRepository } = require('./repository/index')
+const HashtagRepository = require('./repository/hashtag-repository')
 
 app.listen(3000, async () => {
   console.log("server started");
   await connect();
   console.log("Mongo db connected");
 
-  const tweetRepo = new TweetRepository();
-  const tweet = await tweetRepo.getAll(0 ,4)
-  console.log(tweet[0].contentWithEmail);
-});
+ let service = new TweetService()
+ const tweet = service.create({
+  content: 'this is the last after #writing really #excited , it is going to #memorable '
+ })
+ console.log(tweet);
 
+  
+});
+ //************************************************
+
+// let repo = new HashtagRepository()
+// let response = await repo.findByName(['Trend','Excited'])
+// console.log(response);
+// response = response.map(tags => tags.title)
+// console.log(response);
+
+//************************************************
+
+// let repo = new HashtagRepository()
+//   await repo.bulkCreate([
+//     {
+//       title: 'Trend',
+//       tweets: []
+//     },
+//     {
+//       title: 'Excited',
+//       tweets: []
+//     },
+//     {
+//       title: 'Python',
+//       tweets: []
+//     },
+//     {
+//       title: 'Java',
+//       tweets: []
+//     },
+//     {
+//       title: 'Django',
+//       tweets: []
+//     }
+//   ])
+
+//************************************************
+
+// const tweetRepo = new TweetRepository();
+// const tweet = await tweetRepo.create({content: 'With hooks'})
+// console.log(tweet);
+
+//************************************************
+// const tweetRepo = new TweetRepository();
+//   const tweet = await tweetRepo.getAll(0 ,4)
+//   console.log(tweet[0].contentWithEmail);
 //************************************************
 //  PAGINATION
 // const tweetRepo = new TweetRepository();
