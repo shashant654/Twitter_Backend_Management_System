@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Tweet from "../models/tweet.js";
 import CrudRepository from "./crud-repository.js";
 
@@ -6,6 +7,7 @@ class TweetRepository extends CrudRepository {
     super(Tweet);
   }
 
+  // Note :- most probably mongoose gives us static method
   async create(data) {
     try {
       const tweet = await Tweet.create(data);
@@ -40,6 +42,25 @@ class TweetRepository extends CrudRepository {
     try {
       // const tweet = await Tweet.find().limit(limit);
       const tweet = await Tweet.find().skip(offset).limit(limit);
+      return tweet;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //     Note:- populate method only present in mongodb query promise do not have populate  method that's why find() method ko simple bnaye hai
+  // find(id) {
+  //   try {
+  //     const tweet = Tweet.findById(id);
+  //     return tweet;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  async find(id) {
+    try {
+      const tweet = await Tweet.findById(id).populate({path:"likes"});;
       return tweet;
     } catch (error) {
       console.log(error);
