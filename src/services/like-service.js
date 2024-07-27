@@ -98,6 +98,7 @@
 
 // ***************************************
 import { LikeRepository, TweetRepository } from "../repository/index.js";
+import Tweet from "../models/tweet.js";
 
 class LikeService {
   constructor() {
@@ -107,8 +108,6 @@ class LikeService {
 
   async toggleLike(modelId, modelType, userId) {
     let likeable;
-
-//     Note:- populate method only present in mongodb query promise do not have populate  method that's why find() method ko simple bnaye hai
     if (modelType === "Tweet") {
       likeable = await this.tweetRepository.find(modelId);
     } else if (modelType === "Comment") {
@@ -116,19 +115,19 @@ class LikeService {
     } else {
       throw new Error("unknown model type");
     }
-
+    
     if (!likeable) {
       throw new Error("Likeable entity not found");
     }
-
+    
     const exists = await this.likeRepository.findByUserAndLikeable({
       user: userId,
       onModel: modelType,
       likeable: modelId,
     });
-
+    
     console.log(`Like exists: ${exists ? "Yes" : "No"}`);
-
+    
     if (exists) {
       likeable.likes.pull(exists._id);
       await likeable.save();
@@ -148,3 +147,6 @@ class LikeService {
 }
 
 export default LikeService;
+
+
+//     Note:- populate method only present in mongodb query promise do not have populate  method that's why find() method ko simple bnaye hai
