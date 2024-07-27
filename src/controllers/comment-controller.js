@@ -1,4 +1,4 @@
-import CommentService from "../servies/comment-service.js";
+import CommentService from "../services/comment-service.js";
 
 const commentService = new CommentService();
 

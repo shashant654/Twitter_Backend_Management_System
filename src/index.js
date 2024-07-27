@@ -99,25 +99,25 @@ app.listen(3000, async () => {
   await connect();
   console.log("MongoDB connected");
 
-  const userRepo = new UserRepository();
-  const tweetRepo = new TweetRepository();
-  const tweets = await tweetRepo.getAll(0, 10);
-
-  // const user = await userRepo.create({
-  //   email: "pandey@gmail.com",
-  //   password: "123456",
-  //   name: "Shashant",
-  // });
-
-  // const likeService = new LikeService();
-
-  // if (tweets.length > 0) {
-  //   console.log(`Tweet ID: ${tweets[0]._id}, User ID: ${user._id}`);
-  //   await likeService.toggleLike(tweets[0]._id, "Tweet", user._id);
-  // } else {
-  //   console.log("No tweets found to like.");
-  // }
+  
 });
+// const userRepo = new UserRepository();
+// const tweetRepo = new TweetRepository();
+// const tweets = await tweetRepo.getAll(0, 10);
+// const user = await userRepo.create({
+//   email: "pandey@gmail.com",
+//   password: "123456",
+//   name: "Shashant",
+// });
+
+// const likeService = new LikeService();
+
+// if (tweets.length > 0) {
+//   console.log(`Tweet ID: ${tweets[0]._id}, User ID: ${user._id}`);
+//   await likeService.toggleLike(tweets[0]._id, "Tweet", user._id);
+// } else {
+//   console.log("No tweets found to like.");
+// }
 
 
 
