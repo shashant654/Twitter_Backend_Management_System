@@ -7,17 +7,19 @@ class CommentService {
   }
 
   async createComment(modelId, modelType, userId, content) {
+    let commentable;
+
     if (modelId == "Tweet") {
-      var commentable = await this.tweetRepository.get(modelId);
+      commentable = await this.tweetRepository.get(modelId);
     } else if (modelType == "Comment") {
-      var commentable = await this.commentRepository.get(modelId);
+      commentable = await this.commentRepository.get(modelId);
     } else {
       throw new Error("unknown model type");
     }
     const comment = await this.CommentRepository.create({
       content: content,
       userId: userId,
-      onModel: modelType,  
+      onModel: modelType,
       commentable: modelId,
       comments: [],
     });
