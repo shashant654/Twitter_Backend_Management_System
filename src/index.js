@@ -1,88 +1,9 @@
-// import express from "express";
-// import { connect } from "./config/database.js";
-// import bodyParser from "body-parser";
-
-// import apiRoutes from "./routes/index.js";
-// // import service from './services/tweet-service.js'
-
-// import { UserRepository, TweetRepository } from "./repository/index.js";
-
-// import LikeService from "./services/like-service.js";
-
-// const app = express();
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-// app.use("/api", apiRoutes);
-
-// app.listen(3000, async () => {
-//   console.log("server started");
-//   await connect();
-//   console.log("Mongo db connected");
-
-//   const userRepo = new UserRepository();
-//   const tweetRepo = new TweetRepository();
-//   const tweets = await tweetRepo.getAll(0, 10);
-
-//   const user = await userRepo.create({
-//     email: "shashant@gmail.com",
-//     password: "123456",
-//     name: "Shashant",
-//   });
-
-//   const likeService = new LikeService();
-//   await likeService.toggleLike(tweets[0].id, "Tweet", user.id);
-// // });
-
-// *****************************
-// // ----------------------
-// import express from "express";
-// import { connect } from "./config/database.js";
-// import bodyParser from "body-parser";
-// import apiRoutes from "./routes/index.js";
-// import { UserRepository, TweetRepository } from "./repository/index.js";
-// import LikeService from "./services/like-service.js";
-
-// const app = express();
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-// app.use("/api", apiRoutes);
-
-// app.listen(3000, async () => {
-//   console.log("server started");
-//   await connect();
-//   console.log("Mongo db connected");
-
-//   const userRepo = new UserRepository();
-//   const tweetRepo = new TweetRepository();
-//   const tweets = await tweetRepo.getAll(0, 10); // Ensure this is awaited
-
-//   if (tweets.length === 0) {
-//     console.log("No tweets found to like.");
-//     return;
-//   }
-
-//   const user = await userRepo.create({
-//     email: "shashant@gmail.com",
-//     password: "123456",
-//     name: "Shashant",
-//   });
-
-//   const likeService = new LikeService();
-//   try {
-//     const toggleResult = await likeService.toggleLike(tweets[0]._id, "Tweet", user._id);
-//     console.log("Toggle like result:", toggleResult);
-//   } catch (error) {
-//     console.error("Error in toggling like:", error);
-//   }
-// });
-
-// ***************************
-
 import express from "express";
 import { connect } from "./config/database.js";
 import bodyParser from "body-parser";
+
+import passport from "passport";
+import { passportAuth } from "./config/jwt-middleware.js";
 
 import apiRoutes from "./routes/index.js";
 import { UserRepository, TweetRepository } from "./repository/index.js";
@@ -92,14 +13,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(passport.initialize());
+passportAuth(passport);
 app.use("/api", apiRoutes);
 
 app.listen(3000, async () => {
   console.log("server started");
   await connect();
   console.log("MongoDB connected");
-
-  
 });
 // const userRepo = new UserRepository();
 // const tweetRepo = new TweetRepository();
@@ -118,8 +39,6 @@ app.listen(3000, async () => {
 // } else {
 //   console.log("No tweets found to like.");
 // }
-
-
 
 //************************************************
 // let servc = new service()

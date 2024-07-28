@@ -35,9 +35,9 @@ export const login = async (req, res) => {
       err: {},
     });
   } catch (error) {
-    console.log("auth controller");
+    console.error("Error in login controller:", error);
     return res.status(500).json({
-      message: "Something went wrong controller",
+      message: "Something went wrong in controller",
       data: {},
       success: false,
       err: error,

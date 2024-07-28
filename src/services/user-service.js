@@ -30,18 +30,19 @@ class UserService {
       if (!user) {
         throw {
           message: "no user found",
-          success: false,
+          // success: false,
         };
       }
       if (!user.comparePassword(data.password)) {
         throw {
           message: "incorrect password",
-          success: false,
+          // success: false,
         };
       }
       const token = user.genJWT();
       return token;
     } catch (error) {
+      console.error("Error during signin:", error);
       throw error;
     }
   }

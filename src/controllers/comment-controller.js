@@ -2,7 +2,7 @@ import CommentService from "../services/comment-service.js";
 
 const commentService = new CommentService();
 
-export const createComment = async (res, req) => {
+export const createComment = async (req,res) => {
   try {
     const response = await commentService.create(
       req.query.modelId,
