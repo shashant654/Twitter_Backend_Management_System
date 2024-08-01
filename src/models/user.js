@@ -37,7 +37,7 @@ userSchema.methods.comparePassword = function compare(password) {
 }
 
 // npm i jsonwebtoken
-userSchema.methods.genJWT = function generate() {
+userSchema.methods.genJWT = function generate() { 
   return Jwt.sign({ id: this._id, email: this.email }, 'twitter_secret', {
       expiresIn: '1h'
   })

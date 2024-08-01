@@ -13,10 +13,22 @@ const tweetSchema = new mongoose.Schema(
         ref: "Like",
       },
     ],
+    // comments: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Comment",
+    //   },
+    // ],
+    // image: {
+    //   type: String,
+    // },
   },
   { timestamps: true }
 );
 
+
+const Tweet = mongoose.model("Tweet", tweetSchema);
+export default Tweet;
 // tweetSchema.virtual("contentWithEmail").get(function process() {
 //   return `${this.content} \nCreated by: ${this.userEmail}`;
 // });
@@ -27,12 +39,9 @@ const tweetSchema = new mongoose.Schema(
 //   next()
 // })
 
-const Tweet = mongoose.model("Tweet", tweetSchema);
-export default Tweet;
-
 // hashtags: [
-//   {
-// type: mongoose.Schema.Types.ObjectId,
-//     ref: "Hashtag",
-//   },
-// ],
+  //   {
+    // type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Hashtag",
+    //   },
+    // ],
